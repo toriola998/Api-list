@@ -1,31 +1,20 @@
 <template>
-    <Header />
-    <input placeholder="Search API..." v-model="title" @input="getInput()"/>
-    <label for="Category">Choose a Category</label>
-    <select id="category" name="category">
-        <option value="">Cat</option>
-    </select>
+    <div id="app">
+        <Header />
+        <Home />
+    </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Home from './views/Home.vue'
 
 export default {
     name: 'App',
     components: {
-        Header
-    },
-    data() {
-        return {
-           title: '', 
-        }
-    },
-    methods: {
-        getInput(){
-            //this.title = title
-           console.log(this.title) 
-        }
-    }
+        Header,
+        Home,
+    }  
 }
 </script>
 
@@ -34,10 +23,5 @@ export default {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-#app {
-    background-color: #fff;
-    height: 100vh;
-    width: 100%;
 }
 </style>
