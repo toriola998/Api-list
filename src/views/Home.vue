@@ -6,8 +6,8 @@
                     <input placeholder="Search API..." class="search" v-model="title" @input="getInput()"/>
                 </div>
     
-                <div>
-                    <select id="category" name="category">
+                <div class="select-wrap">
+                    <select id="category" name="category" v-model="categories">
                         <option value="" disabled selected hidden>Filter by region</option>
                         <option value="">Cat</option>
                     </select>
@@ -22,6 +22,7 @@ export default {
     data() {
         return {
            title: '', 
+           categories: '',
         }
     },
     methods: {
@@ -49,12 +50,16 @@ export default {
         border: none;
     }
 
-    .search {
+    .search,
+    select {
         height: 3rem;
-        width: 100%;
-        padding-left: 2rem;
         border-radius: 5px;
         border: 1px solid #e5e5e5;
+    }
+
+    .search {
+        width: 100%;
+        padding-left: 2rem;
     }
 
     .search::-webkit-input-placeholder { /* Edge */
@@ -67,5 +72,10 @@ export default {
 
     .search::placeholder {
         font-family: inherit;
+    }
+
+    select {
+        width: 60%;
+        margin-top: 1.5rem;
     }
 </style>
