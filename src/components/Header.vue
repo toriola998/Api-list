@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <h1>List of Free Api</h1>
+        <h1>List of Free API</h1>
     </div>
     
 </template>
