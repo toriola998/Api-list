@@ -13,27 +13,29 @@
                     </select>
                 </div>
             </form>
-
-            <div v-for="list in apiList" :key="list.id" class="each-api">
-                <div class="flex">
-                    <p class="name">{{list.API}}</p> 
-                    <a :href="list.Link"><img src="./../assets/link.svg" alt="visit-site"/></a>
-                </div>
-                <p class="desc">{{list.Description}}</p>
-                <div class="flex details"> 
-                    <div>
-                        <p class="title">Category</p>
-                        <p>{{list.Category}}</p>
-                    </div> 
-                    <div class="mid-div">
-                        <p class="title">HTTPs</p>
-                        <p >{{list.HTTPS}}</p>
+            
+            <div class="container">
+                <div v-for="list in apiList" :key="list.id" class="each-api">
+                    <div class="flex">
+                        <p class="name">{{list.API}}</p> 
+                        <a :href="list.Link" target="_blank"><img src="./../assets/link.svg" alt="visit-site"/></a>
                     </div>
-                    <div>
-                        <p class="title">Cors</p>
-                        <p>{{list.Cors}}</p>
-                    </div>    
-                </div> 
+                    <p class="desc">{{list.Description}}</p>
+                    <div class="flex details"> 
+                        <div>
+                            <p class="title">Category</p>
+                            <p>{{list.Category}}</p>
+                        </div> 
+                        <div class="mid-div">
+                            <p class="title">HTTPs</p>
+                            <p >{{list.HTTPS}}</p>
+                        </div>
+                        <div>
+                            <p class="title">Cors</p>
+                            <p>{{list.Cors}}</p>
+                        </div>    
+                    </div> 
+                </div>
             </div>
         </div>    
     </div>
@@ -66,9 +68,6 @@ export default {
     },
     created() {
         this.getApi()
-    },
-    updated() {
-        console.log(this.apiList)
     }
 }
 </script>
@@ -161,4 +160,35 @@ export default {
         font-weight: bold;
         margin-right: 2rem;
     }
+
+    @media screen and (min-width: 500px) {
+        .container {
+            width: 70%;
+            margin: auto;
+        }
+    }
+
+     @media screen and (min-width: 700px) {
+        .container {
+            width: unset;
+            display: grid;
+            grid-template-columns: 40% 40%;
+            justify-content: center;
+            margin: auto;
+            gap: 20px;
+        }
+    }
+
+    @media screen and (min-width: 1000px) {
+        .container {
+            grid-template-columns: 30% 30% 30%;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .container {
+            grid-template-columns: 25% 25% 25%;
+        }
+    }
+
 </style>
