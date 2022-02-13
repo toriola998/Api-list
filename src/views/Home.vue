@@ -2,16 +2,16 @@
     <div id="home">
         <div class="wrapper">
             <form>
-                 <div class="search-wrap">
-                    <input placeholder="Search API..." class="search" v-model="title" @input="getInput()"/>
+                <div class="flex-search">
+                    <div class="search-wrap flex">
+                        <input placeholder="Search API..." class="search" v-model="title" @input="getInput()"/>
+                    </div>
+
+                    <div class="select-wrap flex">
+                        <p>Categories <img src="./../assets/arrow-down.svg" alt=""/></p>
+                    </div>
                 </div>
-    
-                <div class="select-wrap">
-                    <select id="category" name="category" v-model="categories">
-                        <option value="" disabled selected hidden>Filter by category</option>
-                        <option value="">atarodo</option>
-                    </select>
-                </div>
+                 
             </form>
             
             <div class="container">
@@ -67,7 +67,7 @@ export default {
         }
     },
     created() {
-        this.getApi()
+        //this.getApi()
     }
 }
 </script>
@@ -76,28 +76,44 @@ export default {
     #home {
         background-color: #fff;
         height: 100vh;
-        width: 100%;
+        width: 100vw;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
     }
 
     .wrapper {
         padding: 1.5rem;
     }
 
-    input, select {
+    input{
         outline: none;
         border: none;
     }
 
-    .search,
-    select {
+    .search-wrap,
+    .select-wrap {
         height: 3rem;
         border-radius: 5px;
         border: 1px solid #e5e5e5;
     }
 
-    .search {
-        width: 100%;
+     .select-wrap {
+        width: 60%;
+        margin-top: 1.5rem;
+        cursor: pointer;
+    }
+
+    .select-wrap p {
+        font-size: 14px;
         padding-left: 2rem;
+    }
+
+    .search-wrap {
+        width: 100%;
+    
     }
 
     .search::-webkit-input-placeholder { /* Edge */
@@ -110,11 +126,6 @@ export default {
 
     .search::placeholder {
         font-family: inherit;
-    }
-
-    select {
-        width: 60%;
-        margin-top: 1.5rem;
     }
 
     .title {
@@ -162,6 +173,7 @@ export default {
     }
 
     @media screen and (min-width: 500px) {
+        .search,
         .container {
             width: 70%;
             margin: auto;
@@ -177,11 +189,38 @@ export default {
             margin: auto;
             gap: 20px;
         }
+
+        .flex-search {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 3rem;
+        }
+
+        .search-wrap {
+            width: 45%;
+        }
+
+        .select-wrap {
+            margin-top: unset;
+            width: 30%;
+        }
     }
 
     @media screen and (min-width: 1000px) {
         .container {
             grid-template-columns: 30% 30% 30%;
+        }
+
+         .search-wrap {
+            width: 30%;
+        }
+
+        .select-wrap {
+            width: 20%;
+        }
+
+         .flex-search {
+            padding: 0 4rem;
         }
     }
 
