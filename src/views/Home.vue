@@ -95,7 +95,7 @@ export default {
         }
     },
     mounted() {
-        this.getApi()
+     this.getApi()
     }
 }
 </script>
@@ -171,6 +171,24 @@ export default {
         padding-bottom: 10px;
     }
 
+    .container {
+        padding-top: 3rem;
+    }
+
+    .loading {
+        /* Center vertically and horizontally */
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: load 1s alternate infinite ease-in;
+    }
+
+    @keyframes load {
+        0%   {transform: scale(.9);}
+        100% {transform: scale(1.4);}
+    }
+
     .title {
         font-size: 13px;
         margin-bottom: 3px;
@@ -213,18 +231,6 @@ export default {
         font-size: 1.2rem;
         font-weight: bold;
         margin-right: 2rem;
-    }
-
-    .container {
-        padding-top: 3rem;
-    }
-
-    .loading {
-        /* Center vertically and horizontally */
-        position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
     }
 
     @media screen and (min-width: 500px) {
