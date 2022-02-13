@@ -8,12 +8,12 @@
                     </div>
 
                     <div class="select-wrap">
-                        <div class="flex" style="padding-top: .7rem;">
+                        <div class="flex" style="padding-top: .7rem;" @click="showCategory = !showCategory">
                             <p>Categories</p>
                             <img src="./../assets/arrow-down.svg" alt=""/>
                         </div> 
 
-                        <div class="categories">
+                        <div class="categories" v-if="showCategory">
                             <p>Animal</p>
                             <p>Animation</p>
                             <p>Animal</p>
@@ -65,6 +65,7 @@ export default {
            title: '', 
            categories: '',
            apiList: [],
+           showCategory: false,
         }
     },
     methods: {
@@ -81,7 +82,10 @@ export default {
                     console.log(this.apiList)
                 })
             })
-        }
+        },
+
+        
+
     },
 
     computed: {
