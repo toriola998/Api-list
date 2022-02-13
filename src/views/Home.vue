@@ -7,11 +7,28 @@
                         <input placeholder="Search API..." class="search" v-model="title" @input="getInput()"/>
                     </div>
 
-                    <div class="select-wrap flex">
-                        <p>Categories <img src="./../assets/arrow-down.svg" alt=""/></p>
+                    <div class="select-wrap">
+                        <div class="flex" style="padding-top: .7rem;">
+                            <p>Categories</p>
+                            <img src="./../assets/arrow-down.svg" alt=""/>
+                        </div> 
+
+                        <div class="categories">
+                            <p>Animal</p>
+                            <p>Animation</p>
+                            <p>Animal</p>
+                            <p>Animation</p>
+                            <p>Animal</p>
+                            <p>Animation</p>
+                            <p>Animal</p>
+                            <p>Animation</p>
+                            <p>Animal</p>
+                            <p>Animation</p>
+                            <p>Animal</p>
+                            <p>Animation</p>
+                        </div> 
                     </div>
-                </div>
-                 
+                </div> 
             </form>
             
             <div class="container">
@@ -66,8 +83,20 @@ export default {
             })
         }
     },
+
+    computed: {
+        catList() {
+      let filtered_array = [];
+      for(let i =0; i < this.apiList.length; i++) {
+        if(filtered_array.indexOf(this.apiList[i].Category) === -1) {
+          filtered_array.push(this.apiList[i].Category)
+        }
+      }
+    return filtered_array;
+    }
+  },
     created() {
-        //this.getApi()
+       // this.getApi()
     }
 }
 </script>
@@ -91,6 +120,10 @@ export default {
     input{
         outline: none;
         border: none;
+    }
+
+    .search {
+        padding-left: 2rem;
     }
 
     .search-wrap,
@@ -126,6 +159,18 @@ export default {
 
     .search::placeholder {
         font-family: inherit;
+    }
+
+    .categories {
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
+        margin-top: 2rem;
+        z-index: 99;
+        padding: 1.5rem 0;
+    }
+
+    .categories p {
+        padding-bottom: 10px;
     }
 
     .title {
@@ -178,6 +223,14 @@ export default {
             width: 70%;
             margin: auto;
         }
+
+        .select-wrap {
+            width: 40%;
+        }
+
+        .search {
+            padding-left: unset;
+        }
     }
 
      @media screen and (min-width: 700px) {
@@ -193,7 +246,7 @@ export default {
         .flex-search {
             display: flex;
             justify-content: space-between;
-            padding: 0 3rem;
+            padding: 0 2rem;
         }
 
         .search-wrap {
