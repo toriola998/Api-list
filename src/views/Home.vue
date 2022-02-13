@@ -287,4 +287,11 @@ export default {
         }
     }
 
+    @media screen and (min-width: 1400px) {
+        #home {
+            max-width: 1320px;
+            margin: auto;
+        }   
+    }
+
 </style>
