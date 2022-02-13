@@ -4,7 +4,7 @@
             <form>
                 <div class="flex-search">
                     <div class="search-wrap flex">
-                        <input placeholder="Search API..." class="search" v-model="title" @input="getInput()"/>
+                        <input placeholder="Search API..." class="search" v-model="title"/>
                     </div>
 
                     <div class="select-wrap">
@@ -31,8 +31,9 @@
                 </div> 
             </form>
             
-            <div class="container">
-                <div v-for="list in apiList" :key="list.id" class="each-api">
+            <p v-if="isLoading" class="loading">Loading...</p>
+            <div class="container" v-if="!isLoading">
+                <div v-for="list in searchAPI" :key="list.id" class="each-api">
                     <div class="flex">
                         <p class="name">{{list.API}}</p> 
                         <a :href="list.Link" target="_blank"><img src="./../assets/link.svg" alt="visit-site"/></a>
@@ -66,41 +67,35 @@ export default {
            categories: '',
            apiList: [],
            showCategory: false,
+           isLoading: false,
         }
     },
     methods: {
-        getInput(){
-            //this.title = title
-           console.log(this.title) 
-        },
-
         getApi() {
+            this.isLoading = true;
             fetch('https://api.publicapis.org/entries')
             .then( (res) => {
                 res.json().then( (data) => {
+                    this.isLoading = false;
                     this.apiList = data.entries;
                     console.log(this.apiList)
                 })
             })
-        },
-
-        
-
+        },   
     },
 
     computed: {
-        catList() {
-      let filtered_array = [];
-      for(let i =0; i < this.apiList.length; i++) {
-        if(filtered_array.indexOf(this.apiList[i].Category) === -1) {
-          filtered_array.push(this.apiList[i].Category)
+        searchAPI() {
+            return this.apiList.filter(list => {
+                return (
+                list.API.toLowerCase().includes(this.title.toLowerCase()) 
+                //|| avenge.quote.toLowerCase().includes(this.search.toLowerCase())
+                );
+            });
         }
-      }
-    return filtered_array;
-    }
-  },
-    created() {
-       // this.getApi()
+    },
+    mounted() {
+        this.getApi()
     }
 }
 </script>
@@ -150,7 +145,6 @@ export default {
 
     .search-wrap {
         width: 100%;
-    
     }
 
     .search::-webkit-input-placeholder { /* Edge */
@@ -221,6 +215,18 @@ export default {
         margin-right: 2rem;
     }
 
+    .container {
+        padding-top: 3rem;
+    }
+
+    .loading {
+        /* Center vertically and horizontally */
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     @media screen and (min-width: 500px) {
         .search,
         .container {
@@ -266,6 +272,7 @@ export default {
     @media screen and (min-width: 1000px) {
         .container {
             grid-template-columns: 30% 30% 30%;
+            padding-top: 5rem;
         }
 
          .search-wrap {
@@ -284,6 +291,10 @@ export default {
     @media screen and (min-width: 1200px) {
         .container {
             grid-template-columns: 25% 25% 25%;
+        }
+
+         .flex-search {
+            padding: 0 6rem;
         }
     }
 
