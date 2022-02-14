@@ -31,7 +31,16 @@
                 </div> 
             </form>
             
+            <!--DISPLAY WHEN PAGE IS STILL LOADING-->
             <p v-if="isLoading" class="loading">Loading...</p>
+
+            <!--DISPLAY WHEN THERE'S A PROBLEM-->
+            <div class="not-found">
+                <h1>404</h1>
+                <p>Sorry the page you're looking for doesn't exist</p>
+            </div>
+
+            <!--DISPLAY DATA WHEN API FETCH IS SUCCESSFUL-->
             <div class="container" v-if="!isLoading">
                 <div v-for="list in searchAPI" :key="list.id" class="each-api">
                     <div class="flex">
@@ -75,11 +84,15 @@ export default {
             this.isLoading = true;
             fetch('https://api.publicapis.org/entries')
             .then( (res) => {
-                res.json().then( (data) => {
+                if( res) {
+                     res.json().then( (data) => {
                     this.isLoading = false;
                     this.apiList = data.entries;
                     console.log(this.apiList)
                 })
+                } else {
+                    console.log('something is wrong')
+                }
             })
         },   
     },
@@ -94,8 +107,9 @@ export default {
             });
         }
     },
+
     mounted() {
-     this.getApi()
+        //this.getApi()
     }
 }
 </script>
