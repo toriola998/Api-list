@@ -108,9 +108,6 @@ export default {
                 );
             });
         },
-        
-    
-    
     },
 
     mounted() {
@@ -122,8 +119,9 @@ export default {
 <style scoped>
     #home {
         background-color: #fff;
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     .flex {
