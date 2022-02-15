@@ -14,23 +14,10 @@
                         </div> 
 
                         <div class="categories" v-if="showCategory">
-                            <p>Animal</p>
-                            <p>Animation</p>
-                            <p>Animal</p>
-                            <p>Animation</p>
-                            <p>Animal</p>
-                            <p>Animation</p>
-                            <p>Animal</p>
-                            <p>Animation</p>
-                            <p>Animal</p>
-                            <p>Animation</p>
-                            <p>Animal</p>
-                            <p>Animation</p>
-                        </div> 
-
-                        <!--<div class="categores" v-for="list in removeDuplicates" :key="list.id">
-                            {{list.Category}}
-                        </div>-->
+                           <div v-for="category in categories" :key="category.id">
+                                <p> {{category}}</p>
+                            </div>
+                        </div>  
                     </div>
                 </div> 
             </form>
@@ -77,7 +64,7 @@ export default {
     data() {
         return {
            title: '', 
-           categories: '',
+           categories: [],
            apiList: [],
            showCategory: false,
            isLoading: false,
@@ -94,13 +81,22 @@ export default {
                     this.isLoading = false;
                     this.apiList = data.entries;
                     console.log(this.apiList)
+
+                    //DO NOT REPEAT CATEGORIES OF API
+                    this.apiList.forEach( (api) => {
+                        if(this.categories.indexOf(api.Category) !== -1){
+                            return true
+                        }
+                        this.categories.push(api.Category)
+                        //console.log(this.categories)
+                    })
                 })
                 } else {
                     console.log('something is wrong')
                     this.notFound = !this.notFound;
                 }
             })
-        },   
+        },     
     },
 
     computed: {
@@ -111,7 +107,10 @@ export default {
                 //|| avenge.quote.toLowerCase().includes(this.search.toLowerCase())
                 );
             });
-        },   
+        },
+        
+    
+    
     },
 
     mounted() {
