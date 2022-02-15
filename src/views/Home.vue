@@ -27,6 +27,10 @@
                             <p>Animal</p>
                             <p>Animation</p>
                         </div> 
+
+                        <!--<div class="categores" v-for="list in removeDuplicates" :key="list.id">
+                            {{list.Category}}
+                        </div>-->
                     </div>
                 </div> 
             </form>
@@ -35,9 +39,9 @@
             <p v-if="isLoading" class="loading">Loading...</p>
 
             <!--DISPLAY WHEN THERE'S A PROBLEM-->
-            <div class="not-found">
+            <div class="not-found" v-if="notFound">
                 <h1>404</h1>
-                <p>Sorry the page you're looking for doesn't exist</p>
+                <p>Sorry, no result found!</p>
             </div>
 
             <!--DISPLAY DATA WHEN API FETCH IS SUCCESSFUL-->
@@ -77,6 +81,7 @@ export default {
            apiList: [],
            showCategory: false,
            isLoading: false,
+           notFound: false,
         }
     },
     methods: {
@@ -92,6 +97,7 @@ export default {
                 })
                 } else {
                     console.log('something is wrong')
+                    this.notFound = !this.notFound;
                 }
             })
         },   
@@ -105,11 +111,11 @@ export default {
                 //|| avenge.quote.toLowerCase().includes(this.search.toLowerCase())
                 );
             });
-        }
+        },   
     },
 
     mounted() {
-        //this.getApi()
+        this.getApi()
     }
 }
 </script>
@@ -247,6 +253,23 @@ export default {
         margin-right: 2rem;
     }
 
+    .not-found {
+        /* Center vertically and horizontally */
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .not-found p,
+    .not-found h1{
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 4.5rem;
+    }
+
     @media screen and (min-width: 500px) {
         .search,
         .container {
@@ -304,8 +327,21 @@ export default {
         }
 
          .flex-search {
-            padding: 0 4rem;
+            padding: 0 2.5rem;
         }
+
+        .not-found {
+            top: 55%;
+        }
+
+        h1 {
+            font-size: 6rem;
+        } 
+
+        .not-found p {
+            font-size: 19px;
+        }
+
     }
 
     @media screen and (min-width: 1200px) {
