@@ -15,7 +15,7 @@
 
                         <div class="categories" v-if="showCategory">
                            <div v-for="category in categories" :key="category.id">
-                                <p> {{category}}</p>
+                                <p class="category"> {{category}}</p>
                             </div>
                         </div>  
                     </div>
@@ -178,20 +178,25 @@ export default {
         font-family: inherit;
     }
 
+    .container {
+        padding-top: 3rem;
+    }
+
     .categories {
         border: 1px solid #e5e5e5;
         border-radius: 5px;
         margin-top: 2rem;
         z-index: 99;
         padding: 1.5rem 0;
+        background-color: #fff;
+        overflow-y: scroll;
+        height: 60vh;
     }
 
-    .categories p {
-        padding-bottom: 10px;
-    }
-
-    .container {
-        padding-top: 3rem;
+    .category {
+        padding-bottom: 12px;
+        font-size: 17px;
+        
     }
 
     .loading {
