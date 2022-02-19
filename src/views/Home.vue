@@ -4,21 +4,24 @@
             <form>
                 <div class="flex-search">
                     <div class="search-wrap flex">
-                        <input placeholder="Search API..." class="search" v-model="title"/>
+                        <input placeholder="Search API name, category..." class="search" v-model="title"/>
                     </div>
 
-                    <div class="select-wrap">
+                    <!--<div class="select-wrap">
                         <div class="flex" style="padding-top: .7rem;" @click="showCategory = !showCategory">
                             <p>Categories</p>
                             <img src="./../assets/arrow-down.svg" alt=""/>
                         </div> 
 
                         <div class="categories" v-if="showCategory">
-                           <div v-for="category in categories" :key="category.id">
-                                <p class="category"> {{category}}</p>
+                           <div>
+                                <p  v-for="(category, i) in categories" 
+                                    :key="category.id" class="category" 
+                                    ref="refWord"
+                                    @click="cw_value(i)"> {{category}}</p>
                             </div>
                         </div>  
-                    </div>
+                    </div>-->
                 </div> 
             </form>
             
@@ -66,6 +69,7 @@ export default {
            title: '', 
            categories: [],
            apiList: [],
+           clickedWord: '',
            showCategory: false,
            isLoading: false,
            notFound: false,
@@ -96,21 +100,25 @@ export default {
                     this.notFound = !this.notFound;
                 }
             })
-        },     
+        }, 
+        
+        cw_value (i) {
+            this.clickedWord = this.$refs.refWord[i].innerText
+            console.log(this.clickedWord)
+        }  
     },
-
+    
     computed: {
         searchAPI() {
             return this.apiList.filter(list => {
                 return (
-                list.API.toLowerCase().includes(this.title.toLowerCase()) 
-                //|| avenge.quote.toLowerCase().includes(this.search.toLowerCase())
+                (list.API.toLowerCase() || list.API.toLowerCase()).includes(this.title.toLowerCase()) 
                 );
             });
-        },
+        },  
     },
 
-    mounted() {
+    created() {
         this.getApi()
     }
 }
