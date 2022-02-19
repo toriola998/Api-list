@@ -1,4 +1,8 @@
-# api-lists
+# List of Api 
+This project contains list of api, fetch from https://api.publicapis.org/entries.
+
+### Screenshot
+![](./assets/screenshot.png)
 
 ## Project setup
 ```
