@@ -4,7 +4,7 @@
             <form>
                 <div class="flex-search">
                     <div class="search-wrap flex">
-                        <input placeholder="Search API name, category..." class="search" v-model="title"/>
+                        <input placeholder="Search API..." class="search" v-model="title"/>
                     </div>
 
                     <!--<div class="select-wrap">
@@ -112,7 +112,7 @@ export default {
         searchAPI() {
             return this.apiList.filter(list => {
                 return (
-                (list.API.toLowerCase() || list.API.toLowerCase()).includes(this.title.toLowerCase()) 
+                list.API.toLowerCase().includes(this.title.toLowerCase()) 
                 );
             });
         },  
